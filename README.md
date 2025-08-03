@@ -69,7 +69,7 @@ lagit clone <user>/<repo>   # Clone and track changes
 | --------------- | --------------------------------------------- |
 | Backend         | Node.js, Express                              |
 | Frontend        | Vanilla HTML/CSS + JS                         |
-| CLI Tool        | Node.js (calls C binaries)                    |
+| CLI Tool        | Node.js                                       |
 | Core Repo Logic | C (custom Git-like commands)                  |
 | File Handling   | fs-extra, chokidar                            |
 | Optional        | QR code for joining, WebSocket status updates |
