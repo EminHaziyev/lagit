@@ -1,5 +1,5 @@
 /lagit-cli/node_modules
 /node_modules
-/db
+/db/lagit.db
 .lagit
 /uploads

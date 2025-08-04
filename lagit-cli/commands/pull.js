@@ -65,6 +65,6 @@ console.error(
     fs.writeFileSync(configFilePath, JSON.stringify(config, null, 2));
     console.log(`Repository ${repoName} pulled successfully.`);
   } catch (err) {
-    console.error("Error during clone:", err.message);
+    console.error("Error during pull:", err.message);
   }
 }

@@ -25,7 +25,7 @@ export async function push() {
   const { username, password, commitMessage, repoName } = config;
 
   if (!username || !password || !commitMessage) {
-    console.error("Missing username/password/commitMessage in config.json");
+    console.error("You did not set your commit message. Please do: lagit commmit -h");
     return;
   }
 

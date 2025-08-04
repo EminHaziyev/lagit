@@ -10,7 +10,12 @@ export async function create(repoName) {
     const cwd = process.cwd();
     const lagitFolder = path.join(cwd, ".lagit");
     const configFilePath = path.join(lagitFolder, "config.json");
-    
+    if (!fs.existsSync(lagitFolder)) {
+        console.error(
+          "Error: .lagit folder does not exist. Please check lagit initialization: lagit init-login -h"
+        );
+        return;
+      }
     let userData = {};
     if (fs.existsSync(configFilePath)) {
       userData = JSON.parse(fs.readFileSync(configFilePath, "utf-8"));
@@ -36,11 +41,9 @@ export async function create(repoName) {
       const errorText = await response.text();
       console.error("Push failed:", errorText);
     } else {
-      console.log("Push successful");
+      console.log("Successfully created repository:", repoName);
     }
-    console.log(
-      "Added commit message successfully. You can now push your changes."
-    );
+    
   } catch (error) {
     console.log("Error occured while doing operation:", error);
   }
