@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Repository - lagit</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <h1 class="logo">lagit</h1>
+        <nav class="nav">
+          <a href="/" class="nav-link">Repositories</a>
+          <a href="https://emin.works" class="nav-link">Developed by: Emin Haziyev</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="main">
+      <div class="container">
+        <div class="breadcrumb">
+
+          <a href="/">Repositories</a>
+          
+          <span id="repo-name"></span>
+        </div>
+
+        <div class="repo-header">
+          <div class="repo-title">
+            <h2 id="current-repo-name"><%= name %></h2>
+            <div class="repo-stats">
+              <span class="stat"><%= created_at %></span>
+            </div>
+          </div>
+          
+        </div>
+
+        <div class="repo-nav">
+          <a href="#" class="repo-nav-link active">Code</a>
+        </div>
+
+        <div class="file-browser">
+          <div class="file-browser-header">
+            <div class="current-path">
+              <span 
+                >Repository files</span>
+              <span id="current-path"></span>
+            </div>
+            
+          </div>
+
+          <div class="file-list" id="file-list">
+            
+            <% folderStructure.forEach(item => { %> <% if (item.type ===
+            'folder') { %>
+            
+              <div class="file-item" onclick="navigateToFolder('<%= item.name %>')">
+                <span class="file-icon">📁</span>
+                <span class="file-name folder"><%= item.name %></span>
+                <span class="file-size">-</span>
+                <span class="file-date"></span>
+              </div>
+            
+            <% } else { %>
+            <div class="file-item" onclick="navigateToFolder('<%= item.name %>')">
+              <span class="file-icon">📄</span>
+              <span class="file-name"><%= item.name %></span>
+              <span class="file-date"></span>
+            </div>
+            <% } %> <% }) %>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>&copy; 2024 lagit - Open Source Local Git Interface</p>
+      </div>
+    </footer>
+    <script>
+      function navigateToFolder(folderName) {
+        const currentUrl = window.location.pathname.replace(/\/$/, ""); // remove trailing slash
+        const nextUrl = currentUrl + "/" + encodeURIComponent(folderName);
+        window.location.href = nextUrl;
+      }
+      function currentPath() {
+        const currentUrl = window.location.pathname.replace(/\/$/, ""); // remove trailing slash
+        
+        document.getElementById("repo-name").innerHTML =  currentUrl.split('/repo')[1];
+        
+      }
+      currentPath();
+    </script>
+    <script src="script.js"></script>
+  </body>
+</html>

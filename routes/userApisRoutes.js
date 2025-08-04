@@ -18,14 +18,22 @@ router.post('/signup',authParser, async (req, res) => {
     }
 });
 
-router.post('/login', authMiddleware, async (req, res) => {
+router.post('/login',authParser, async (req, res) => {
     const { username, password } = req.auth;
+    console.log("Attempting to log in user:", username);
     if (!username || !password) {
         return res.status(400).send('Username and password required');
     }
     try {
-        await loginUser(username, password);
-        res.send('Login successful');
+        const response = await loginUser(username, password);
+        console.log("User logged in successfully:", response);
+        if(response.message === "ok") {
+            res.status(200).json(response); // Store user info in request for further use
+        }
+        else{
+            res.status(401).send('Invalid credentials');
+        }
+        
     } catch (err) {
         res.status(401).send(err.message || 'Invalid credentials');
     }

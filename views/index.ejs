@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>lagit - Local Git Interface</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <h1>lagit</h1>
+        <nav class="nav">
+          <a href="index.html" class="nav-link active">Repositories</a>
+          <a href="https://emin.works" class="nav-link">Developed by: Emin Haziyev</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="main">
+      <div class="container">
+        <div class="page-header">
+          <h2>Repositories</h2>
+          <button class="btn btn-primary">New Repository</button>
+        </div>
+
+        <div class="repo-list">
+          <% function formatTimeAgo(datetimeStr) { %> const updated = new
+          Date(datetimeStr); const now = new Date(); const diffMs = now -
+          updated; const seconds = Math.floor(diffMs / 1000); const minutes =
+          Math.floor(diffMs / (1000 * 60)); const hours = Math.floor(diffMs /
+          (1000 * 60 * 60)); const days = Math.floor(diffMs / (1000 * 60 * 60 *
+          24)); if (seconds < 60) return `Updated ${seconds} seconds ago`; if
+          (minutes < 60) return `Updated ${minutes} minutes ago`; if (hours <
+          24) return `Updated ${hours} hours ago`; return `Updated ${days} days
+          ago`; <% } %> <% repos.forEach(repo => { %>
+          <a href="/repo/<%= repo.username %>/<%= repo.name %>/">
+            <div class="repo-item">
+            <div class="repo-info">
+              <h3 class="repo-name"><%= repo.name %></h3>
+              <p class="repo-description">Created by: <%= repo.username %></p>
+              <div class="repo-meta">
+                <span class="repo-language"><%= repo.created_at %></span>
+              </div>
+            </div>
+            
+          </div>
+          </a>
+          <% }) %>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>&copy; 2024 lagit - Open Source Local Git Interface</p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

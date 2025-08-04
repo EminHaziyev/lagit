@@ -5,7 +5,7 @@ import { fileURLToPath } from "url";
 
 const tar = await import("tar");
 
-export async function createRepo(repoName, username, tarPath) {
+export async function createRepo(repoName, username) {
   const db = await connectToDb();
   try {
     const results = await db.run(
@@ -33,12 +33,7 @@ export async function createRepo(repoName, username, tarPath) {
       `export default ${JSON.stringify(configData, null, 2)};\n`
     );
 
-    await tar.x({
-      file: tarPath,
-      cwd: folder,
-    });
-
-    fs.unlinkSync(tarPath);
+    
     return {
       id: results.lastID,
       name: repoName,
@@ -59,6 +54,8 @@ export async function findRepoByName(repoName) {
 
   return results;
 }
+
+
 
 export async function updateRepo(repoName, username, tarPath, commitMessage) {
   const repoDir = path.join(
@@ -85,7 +82,7 @@ export async function updateRepo(repoName, username, tarPath, commitMessage) {
     file: tarPath,
     cwd: repoDir,
   });
-
+  console.log("Extracted files successfully**********8");
   const configPath = path.join(repoDir, "repo.config.js");
   const configModule = await import(`file://${configPath}`);
   const config = {
@@ -174,4 +171,21 @@ export async function deleteRepo(repoName, username) {
   }
 
   return { message: "Repository deleted successfully", repoName };
+}
+
+
+export async function listRepos() {
+  const db = await connectToDb();
+  // Get all repos with their usernames using a JOIN
+  const query = `
+    SELECT repositories.*, users.username
+    FROM repositories
+    LEFT JOIN users ON repositories.user_id = users.id
+  `;
+  const repos = await db.all(query);
+  // Map to ensure each repo object has a 'username' field
+  return repos.map(repo => ({
+    ...repo,
+    username: repo.username || null
+  }));
 }

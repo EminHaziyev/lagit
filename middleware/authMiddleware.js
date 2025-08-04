@@ -26,6 +26,7 @@ export async function authMiddleware(req, res, next) {
 
 
 export function authParser(req, res, next) {
+  console.log("Parsing auth header");
     const authHeader = req.headers.authorization;
     if (!authHeader || !authHeader.startsWith("Basic ")) {
         return res.status(401).send("Missing or invalid Authorization header");
