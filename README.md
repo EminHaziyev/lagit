@@ -42,12 +42,7 @@ No cloud, no centralized GitHub/GitLab — everything is local and direct.
 
 ---
 
-## 🌐 Access Methods
 
-- 🖥️ **Web GUI**  
- Coming soon...
-- 🖱️ **CLI Commands**
- Coming soon...
 ## 🏗️ Architecture
 - One user runs the Lagit Host (Node.js/Express backend).
 - Others connect through Web UI or CLI tool.
@@ -61,16 +56,42 @@ No cloud, no centralized GitHub/GitLab — everything is local and direct.
 | Backend         | Node.js, Express                              |
 | Frontend        | Vanilla HTML/CSS + JS                         |
 | CLI Tool        | Node.js                                       |
-| Core Repo Logic | C (custom Git-like commands)                  |
-| File Handling   | fs-extra, chokidar                            |
-| Optional        | QR code for joining, WebSocket status updates |
+| Core Repo Logic | Node.js, Commander.js                         |
+| File Handling   | multer                                        |
 
 
-## 🚀 Installation
-### On the Host Machine (Server)
-Coming soon...
-### On Other Users (Clients)
-Coming soon...
+
+## 🚀 Get Started
+To use lagit CLI, install it like this:
+```
+git clone https://github.com/EminHaziyev/lagit.git
+cd lagit
+cd lagit-cli
+npm install -g .
+```
+
+## Usage
+Options
+| Option       | Description                  |
+| ------------ | ---------------------------- |
+| `-h, --help` | Display help for the command |
+
+
+Commands
+| Command                            | Description                                         |
+| ---------------------------------- | --------------------------------------------------- |
+| `init-login <username> <password>` | Initialize a `lagit` repo and login to your account |
+| `create <repoName>`                | Create a new repository on the `lagit` server       |
+| `commit <message>`                 | Add a commit message to your repository             |
+| `push`                             | Push your code to the `lagit` server                |
+| `clone <repoName>`                 | Clone a repository from the `lagit` server          |
+| `pull`                             | Pull the latest changes from the `lagit` server     |
+| `delete <repoName>`                | Delete one of your repositories from the server     |
+| `list-repos`                       | List all repositories on the `lagit` server         |
+| `help [command]`                   | Display help for a specific command                 |
+
+## Next Steps
+Add real version controlling system with changes, stages and etc.
 
 ## 💡 Use Cases
 | Audience        | Use Case                           |
