@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import {Command} from 'commander';
-import init from '../commands/init.js';
+import initAndlogin from '../commands/init.js';
 // import init from '../commands/init.js';
 // import login from '../commands/login.js';
 // import commit from '../commands/commit.js';
@@ -15,13 +15,9 @@ const program = new Command();
 program
     .command("init-login <username> <password>")
     .description("initialize a lagit repo and login to your account")
-    .action(init)
+    .action(initAndlogin)
 
 
-// program 
-//     .command("login <username> <password>")
-//     .description("login to your lagit user")
-//     .action(login)
 
 
 // program
