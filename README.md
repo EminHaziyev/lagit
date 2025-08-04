@@ -45,18 +45,9 @@ No cloud, no centralized GitHub/GitLab — everything is local and direct.
 ## 🌐 Access Methods
 
 - 🖥️ **Web GUI**  
-  Open your browser at `http://<host-ip>:4321` to view and manage repositories.
-
+ Coming soon...
 - 🖱️ **CLI Commands**
-
-```bash
-lagit init                  # Initialize a repo
-lagit list                  # List available repos on network
-lagit create <repo>         # Create a new repo
-lagit push <repo>           # Push your latest version
-lagit pull <user>/<repo>    # Pull someone else’s repo
-lagit clone <user>/<repo>   # Clone and track changes
-```
+ Coming soon...
 ## 🏗️ Architecture
 - One user runs the Lagit Host (Node.js/Express backend).
 - Others connect through Web UI or CLI tool.
