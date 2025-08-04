@@ -14,46 +14,46 @@ const program = new Command();
 
 program
     .command("init-login <username> <password>")
-    .description("initialize a lagit repo and login to your account")
+    .description("Initialize a lagit repo and login to your account")
     .action(initAndlogin)
 
 program
     .command("create <repoName>")
-    .description("initialize a lagit repo and login to your account")
+    .description("Create a new repository in lagit server")
     .action(create)
 
 
 program
     .command("commit <message>")
-    .description("add a commit message")
+    .description("Add a commit message to your repository")
     .action(commit)
 
 
 program
     .command("push")
-    .description("push your code to lagit server")
+    .description("Push your code to lagit server")
     .action(push)
 
 
 program
     .command("clone <repoName>")
-    .description("push your code to lagit server")
+    .description("Clone a repository from lagit server")
     .action(cloneRepo)
 
     
 program
     .command("pull")
-    .description("push your code to lagit server")
+    .description("Pull the latest changes from the lagit server")
     .action(pullRepo)
 
 program
     .command("delete <repoName>")
-    .description("push your code to lagit server")
+    .description("Delete one of your repositories from lagit server")
     .action(deleteRepoApi)
 
 program
     .command("list-repos")
-    .description("push your code to lagit server")
+    .description("List all repositories from lagit server")
     .action(listReposApi)
 
 program.parse(process.argv);
