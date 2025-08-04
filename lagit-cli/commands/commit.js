@@ -3,9 +3,14 @@ import path from "path";
 
 export async function commit(message) {
   try {
-    
     const cwd = process.cwd();
     const lagitFolder = path.join(cwd, ".lagit");
+    if (!fs.existsSync(lagitFolder)) {
+      console.error(
+      "Error: .lagit folder does not exist. Please check lagit initialization: lagit init-login -h"
+    );
+      return;
+    }
     const configFilePath = path.join(lagitFolder, "config.json");
     let userData = {};
     if (fs.existsSync(configFilePath)) {

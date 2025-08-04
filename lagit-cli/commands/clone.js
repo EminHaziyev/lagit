@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import os from "os";
-const tar = await import('tar');
+const tar = await import("tar");
 import fetch from "node-fetch";
 
 export async function cloneRepo(repoName) {
@@ -9,9 +9,15 @@ export async function cloneRepo(repoName) {
   const lagitFolder = path.join(cwd, ".lagit");
   const configFilePath = path.join(lagitFolder, "config.json");
 
+  if (!fs.existsSync(lagitFolder)) {
+    console.error(
+      "Error: .lagit folder does not exist. Please check lagit initialization: lagit init-login -h"
+    );
+    return;
+  }
   let config;
   try {
-    const configRaw = fs.readFileSync(configFilePath, 'utf-8');
+    const configRaw = fs.readFileSync(configFilePath, "utf-8");
     config = JSON.parse(configRaw);
   } catch (err) {
     console.error("Failed to read or parse config.json:", err.message);
@@ -33,8 +39,12 @@ export async function cloneRepo(repoName) {
     const response = await fetch("http://localhost:3000/api/repo/clone", {
       method: "POST",
       headers: {
-        Authorization: "Basic " + Buffer.from(`${config.username}:${config.password}`).toString("base64"),
-        "Content-Type": "application/json"
+        Authorization:
+          "Basic " +
+          Buffer.from(`${config.username}:${config.password}`).toString(
+            "base64"
+          ),
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ repoName }),
     });
@@ -50,12 +60,12 @@ export async function cloneRepo(repoName) {
 
     await new Promise((resolve, reject) => {
       response.body.pipe(fileStream);
-      response.body.on("error", err => {
+      response.body.on("error", (err) => {
         fileStream.close();
         reject(err);
       });
       fileStream.on("finish", resolve);
-      fileStream.on("error", err => {
+      fileStream.on("error", (err) => {
         fileStream.close();
         reject(err);
       });
@@ -76,7 +86,9 @@ export async function cloneRepo(repoName) {
           fs.unlinkSync(tarPath);
         }
       } catch (cleanupErr) {
-        console.warn(`Failed to delete temporary tar file: ${cleanupErr.message}`);
+        console.warn(
+          `Failed to delete temporary tar file: ${cleanupErr.message}`
+        );
       }
     }
 
@@ -89,7 +101,6 @@ export async function cloneRepo(repoName) {
     }
 
     console.log("Repository cloned successfully.");
-
   } catch (err) {
     console.error("Error during clone:", err.message);
   }
