@@ -1,4 +1,5 @@
 <img src="http://raw.githubusercontent.com/EminHaziyev/lagit/refs/heads/main/public/logo.png" width="100px">
+
 # Lagit
 
 > Peer-to-peer version control over LAN. No internet. No setup. Just code.
