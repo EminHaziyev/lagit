@@ -9,7 +9,7 @@ console.log('userApisRoutes imported successfully');
 
 import repoApisRoutes from './routes/repoApisRoutes.js';
 console.log('repoApisRoutes imported successfully');
-
+import bodyParser from 'body-parser';
 
 import webUIRoutes from './routes/webUIRoutes.js';
 console.log('webUIRoutes imported successfully');
@@ -35,6 +35,7 @@ console.log('Setting up middleware...');
 app.use(express.json());
 app.use(express.static('public'));
 console.log('Setting up routes...');
+app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use('/api', userApisRoutes);
 console.log('userApisRoutes mounted');
@@ -44,8 +45,6 @@ console.log('repoApisRoutes mounted');
 
 app.use('/', webUIRoutes);
 console.log('repoApisRoutes mounted');
-
-
 
 console.log('Starting server on port 3000...');
 const PORT = process.env.PORT || 3000;

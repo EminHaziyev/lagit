@@ -2,11 +2,15 @@ import sqlite3 from "sqlite3";
 import {open} from "sqlite";
 import {dirname , join} from "path";
 import { fileURLToPath } from "url";
-
+import fs from "fs";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+const dbDir = join(__dirname, "../db");
+const dbPath = join(dbDir, "lagit.db");
+if (!fs.existsSync(dbDir)) {
+  fs.mkdirSync(dbDir, { recursive: true });
+}
 
-const dbPath = join(__dirname, '../db/lagit.db');
 let db;
 
 export async function connectToDb() {
